@@ -14,7 +14,7 @@ const middlewares = new CommonMiddleware(app)
 const errorHandler = new ErrorHandler(app)
 
 // Security handler middleware
-const securityHandler = new PassportAuthentication(app)
+//const securityHandler = new PassportAuthentication(app)
 
 // Routes
 const routes = new Routes(app)
