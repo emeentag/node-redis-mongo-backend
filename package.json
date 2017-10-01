@@ -4,7 +4,7 @@
   "description": "This is the backend challange reasources.",
   "main": "index.js",
   "scripts": {
-    "server": "NODE_ENV=production nodemon ./src/server/Server.js --exec babel-node",
+    "server:development": "NODE_ENV=development nodemon ./src/server/Server.js --exec babel-node",
     "test": "mocha || true"
   },
   "repository": {
@@ -52,6 +52,7 @@
     "minimatch": "^3.0.4",
     "mocha": "^3.5.3",
     "moment": "^2.18.1",
+    "mongoose": "^4.11.14",
     "mysql": "^2.14.1",
     "mysql2": "^1.3.6",
     "node-sass": "^4.5.3",
