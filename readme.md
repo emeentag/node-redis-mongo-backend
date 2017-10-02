@@ -56,6 +56,6 @@ When we get a request, our redis cache middleware is always working and if there
 ## How could it be better:
 First of all there is no missing item in the project. All requested items are done.
 
-But ofcourse there could be some improvements on the system. For instance, for caching we can create another backend which is for only caching. Right now we are handling caching in a middleware but it could be better if we can create a docker image for only caching backend. And whenever we get a request for we can make a request to caching server and can respond in a suitable way. Also we can make this redirection with using a Loadbalancer. Because as we know in pratically we are caching only for specific endpoints so we can easly redirect those request to that caching server first from LB or another redirection server which is created bby us.
+But ofcourse there could be some improvements on the system. For instance, for caching we can create another backend which is for only caching. Right now we are handling caching in a middleware but it could be better if we can create a docker image for only caching backend. And whenever we get a request for we can make a request to caching server and can respond in a suitable way. Like microservices. Also we can make this redirection with using a Loadbalancer. Because as we know in pratically we are caching only for specific endpoints so we can easly redirect those request to that caching server first from LB or another redirection server which is created bby us.
 
 Also an oAuth2 security could be implemented.
