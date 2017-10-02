@@ -19,7 +19,7 @@ First of all clone or fork this repository. After you successfully clone it then
 ### Setup your environment with using docker:
 * Run `docker-compose up` in a terminal. With this command you will have both mongo and redis server in your environment.
 * Run `npm run server:development` in another terminal session.
-* You are done. You can go `http://localhost:3030` and check if everything is up and running.
+* **You are done.** You can go `http://localhost:3030` and check if everything is up and running.
 
 ## How to test?
 * Once you run your docker compose, you can also run your server with `npm run server:test`. This script added to the npm because with this way you will have a seperate db for testing your app.
