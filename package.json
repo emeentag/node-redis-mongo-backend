@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "server:development": "NODE_ENV=development nodemon ./src/server/Server.js --exec babel-node",
+    "server:test": "NODE_ENV=test nodemon ./src/server/Server.js --exec babel-node",
     "test": "mocha --require babel-polyfill --compilers js:babel-register"
   },
   "repository": {

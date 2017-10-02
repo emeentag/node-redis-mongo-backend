@@ -4,7 +4,7 @@ export default class UserController {
   static createUser(req, res, next, db) {
 
     db.models.User.create(req.body, (err, user) => {
-      if(err) {
+      if (err) {
         console.error(err);
         res.status(500).send();
       } else {
@@ -17,7 +17,7 @@ export default class UserController {
   static createUsers(req, res, next, db) {
 
     db.models.User.create(req.body, (err) => {
-      if(err) {
+      if (err) {
         console.error(err);
         res.status(500).send();
       } else {
@@ -32,19 +32,19 @@ export default class UserController {
     db.models.User.findOne({
       email: req.query.email
     })
-    .exec((err, user) => {
-      if(err) {
-        console.error(err);
-        res.status(500).send();
-      } else {
-        res.status(200).send(user);
-      }
-    });
+      .exec((err, user) => {
+        if (err) {
+          console.error(err);
+          res.status(500).send();
+        } else {
+          res.status(200).send(user);
+        }
+      });
   }
 
   // List all users.
   static readUsers(req, res, next, db) {
-    db.models.User.find().sort({"_id": 1}).exec((err, users) => {
+    db.models.User.find().sort({ "_id": 1 }).exec((err, users) => {
       res.send(users);
     });
   }
@@ -54,25 +54,25 @@ export default class UserController {
     var limit = Math.max(0, req.query.limit);
     var page = Math.max(-1, req.query.page);
 
-    if(page < 0) {
+    if (page < 0) {
       // Return every records.
       UserController.readUsers(req, res, next, db);
     } else {
       // Limit and page the result.
       db.models.User.find({
-        age: {$gte: age}
+        age: { $gte: age }
       })
-      .limit(limit)
-      .skip(limit * page)
-      .sort({age: 1})
-      .exec((err, users) => {
-        if(err) {
-          console.error(err);
-          res.status(500).send();
-        } else {
-          res.status(200).send(users);
-        }
-      });
+        .limit(limit)
+        .skip(limit * page)
+        .sort({ age: 1 })
+        .exec((err, users) => {
+          if (err) {
+            console.error(err);
+            res.status(500).send();
+          } else {
+            res.status(200).send(users);
+          }
+        });
     }
   }
 
@@ -81,7 +81,7 @@ export default class UserController {
     db.models.User.findOneAndUpdate({
       email: req.query.email
     }, req.body, (err, user) => {
-      if(err) {
+      if (err) {
         console.error(err);
         res.status(500).send();
       } else {
@@ -95,11 +95,23 @@ export default class UserController {
     db.models.User.remove({
       email: req.query.email
     }, (err) => {
-      if(err) {
+      if (err) {
         console.error(err);
         res.status(500).send();
       } else {
-        res.status(200).send("User " + req.query.email + " deleted.");        
+        res.status(200).send("User " + req.query.email + " deleted.");
+      }
+    })
+  }
+
+  // Delete users.
+  static deleteUsers(req, res, next, db) {
+    db.models.User.remove({}, (err) => {
+      if (err) {
+        console.error(err);
+        res.status(500).send();
+      } else {
+        res.status(200).send("Users are deleted.");
       }
     })
   }
