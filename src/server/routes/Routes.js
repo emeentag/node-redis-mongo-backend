@@ -70,7 +70,7 @@ export default class Routes {
     // DELETEs
 
     // Delete single user by /user?email
-    this.app.delete('/user', (req, res, next) => {
+    this.app.delete('/user', this.middlewares.queryContainsEmail, (req, res, next) => {
       UserController.deleteUserByEmail(req, res, next, this.db);
     })
   }
