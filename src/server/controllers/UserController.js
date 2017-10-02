@@ -1,3 +1,5 @@
+import ServerConfig from '../config/ServerConfig';
+
 export default class UserController {
 
   // Create single user.
@@ -49,7 +51,7 @@ export default class UserController {
     });
   }
 
-  static readUsersByPage(req, res, next, db) {
+  static readUsersByPage(req, res, next, db, redisMiddleware) {
     var age = Math.max(0, req.query.age);
     var limit = Math.max(0, req.query.limit);
     var page = Math.max(-1, req.query.page);
@@ -70,6 +72,11 @@ export default class UserController {
             console.error(err);
             res.status(500).send();
           } else {
+            // Cache the data.
+            const key = redisMiddleware.generateCacheKey(req.path, req.query.age, req.query.page);
+            redisMiddleware.redisClient.setex(key, ServerConfig.REDIS_CACHE_TIMEOUT, JSON.stringify(users));
+            console.log(`Response is cached with key: ${key}`);
+
             res.status(200).send(users);
           }
         });
@@ -85,7 +92,7 @@ export default class UserController {
         console.error(err);
         res.status(500).send();
       } else {
-        res.status(200).send("User " + user.email + " updated.");
+        res.status(200).send(`User ${user.email} updated.`);
       }
     })
   }
@@ -99,7 +106,7 @@ export default class UserController {
         console.error(err);
         res.status(500).send();
       } else {
-        res.status(200).send("User " + req.query.email + " deleted.");
+        res.status(200).send(`User ${req.query.email} deleted.`);
       }
     })
   }

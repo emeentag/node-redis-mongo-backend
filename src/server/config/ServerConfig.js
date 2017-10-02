@@ -4,4 +4,8 @@ export default class ServerConfig {
   static SERVER_TEST = 'http://localhost:3030';
   static MONGO_DB = (process.env.NODE_ENV === 'test' ? 'test' : 'jodel');
   static MONGO_DB_URL = "mongodb://0.0.0.0:27017/";
+  static REDIS_HOST = '0.0.0.0';
+  static REDIS_PORT = (process.env.REDIS_PORT || '6379');
+  // In second.
+  static REDIS_CACHE_TIMEOUT = 120;
 }

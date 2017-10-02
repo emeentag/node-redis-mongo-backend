@@ -12,12 +12,12 @@ export default class CommonMiddleware {
   // Apply common and necessary appwise middlewares.
   applyMiddlewares() {
     this.app.use(BodyParser.json());
-    this.app.use(BodyParser.urlencoded({extended: true}));
+    this.app.use(BodyParser.urlencoded({ extended: true }));
     this.app.use(MethodOverride());
   }
 
   hasRequestBody(req, res, next) {
-    if(req.body && !_.isEmpty(req.body)) {
+    if (req.body && !_.isEmpty(req.body)) {
       next();
     } else {
       res.status(400).send("There is no body provided.")
@@ -25,10 +25,19 @@ export default class CommonMiddleware {
   }
 
   queryContainsEmail(req, res, next) {
-    if(req.query.email) {
+    if (req.query.email) {
       next();
     } else {
       res.status(400).send("There is no email in query.")
+    }
+  }
+
+  queryLimitPageCheck(req, res, next) {
+    if (req.query.limit && req.query.page &&
+      req.query.limit >= 0 && req.query.page >= 0) {
+      next();
+    } else {
+      res.status(400).send("This age and limit parameters are not valid.")
     }
   }
 }

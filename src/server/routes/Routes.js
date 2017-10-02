@@ -5,11 +5,12 @@ import UserController from '../controllers/UserController';
 
 export default class Routes {
 
-  constructor(express, app, db, middlewares) {
+  constructor(express, app, commonMiddleware, redisCacheMiddleware, db) {
     this.express = express;
     this.app = app;
+    this.commonMiddleware = commonMiddleware;
+    this.redisCacheMiddleware = redisCacheMiddleware;
     this.db = db;
-    this.middlewares = middlewares;
     this.loadTemplateResources()
     this.loadStaticResources()
     this.createURLRoutes();
@@ -34,45 +35,48 @@ export default class Routes {
     });
 
     // List users by /users?age=32&limit=3&page=0
-    this.app.get('/users', (req, res, next) => {
-      if(req.query.page) {
-        UserController.readUsersByPage(req, res, next, this.db);
-      } else {
-        UserController.readUsers(req, res, next, this.db);
-      }
-    })
+    this.app.get('/users', this.commonMiddleware.queryLimitPageCheck,
+      (req, res, next) => {
+        this.redisCacheMiddleware.cacheCheck(req, res, next, this.redisCacheMiddleware);
+      }, (req, res, next) => {
+        if (req.query.page) {
+          UserController.readUsersByPage(req, res, next, this.db, this.redisCacheMiddleware);
+        } else {
+          UserController.readUsers(req, res, next, this.db);
+        }
+    });
 
     // Get single user by /user?email
-    this.app.get('/user', this.middlewares.queryContainsEmail, (req, res, next) => {
+    this.app.get('/user', this.commonMiddleware.queryContainsEmail, (req, res, next) => {
       UserController.readUserByEmail(req, res, next, this.db);
-    })
+    });
 
     // ::::POSTs::::
     // Create single user with body.
-    this.app.post('/user', this.middlewares.hasRequestBody, (req, res, next) => {
+    this.app.post('/user', this.commonMiddleware.hasRequestBody, (req, res, next) => {
       UserController.createUser(req, res, next, this.db);
-    })
+    });
 
     // Create many user with body.
-    this.app.post('/users', this.middlewares.hasRequestBody, (req, res, next) => {
+    this.app.post('/users', this.commonMiddleware.hasRequestBody, (req, res, next) => {
       UserController.createUsers(req, res, next, this.db);
-    })
+    });
 
     // ::::PUTs::::
     // Update single user by /user?email with body.
-    this.app.put('/user', this.middlewares.queryContainsEmail, this.middlewares.hasRequestBody, (req, res, next) => {
+    this.app.put('/user', this.commonMiddleware.queryContainsEmail, this.commonMiddleware.hasRequestBody, (req, res, next) => {
       UserController.updateUserByEmail(req, res, next, this.db);
-    })
+    });
 
     // ::::DELETEs::::
     // Delete single user by /user?email
-    this.app.delete('/user', this.middlewares.queryContainsEmail, (req, res, next) => {
+    this.app.delete('/user', this.commonMiddleware.queryContainsEmail, (req, res, next) => {
       UserController.deleteUserByEmail(req, res, next, this.db);
-    })
-    
+    });
+
     // Delete all users.
     this.app.delete('/users', (req, res, next) => {
       UserController.deleteUsers(req, res, next, this.db);
-    })
+    });
   }
 }

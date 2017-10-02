@@ -2,7 +2,7 @@ import Chai from 'chai';
 import ChaiClient from 'chai-http';
 import validator from 'validator';
 import ServerConfig from '../src/server/config/ServerConfig';
-import users from './seeds/users.json';
+import users from '../src/server/data/seeds/users.json';
 
 var Expect = Chai.expect;
 Chai.use(ChaiClient);
