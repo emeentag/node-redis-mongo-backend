@@ -24,6 +24,9 @@ WORKDIR ${WORK_DIRECTORY}
 COPY . .
 
 # Install dependencies
-RUN ./docker_install_dependencies.sh ${HOST} ${PORT}
+#RUN ./docker_install_dependencies.sh ${HOST} ${PORT}
+RUN node -v \
+    && npm -v \
+    && npm install
 
-ENTRYPOINT ["./docker_run_container.sh"]
+ENTRYPOINT ["npm", "run", "server:development"]

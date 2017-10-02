@@ -12,4 +12,4 @@ node -v
 npm -v
 
 # Install node modules:
-npm Install
+npm install
