@@ -3,7 +3,6 @@ import Express from 'express';
 import CommonMiddleware from './middlewares/CommonMiddleware';
 import ErrorHandler from './middlewares/ErrorHandler';
 import RedisMiddleware from './middlewares/RedisMiddleware';
-import PassportAuthentication from './middlewares/security/PassportAuthentication';
 import Routes from './routes/Routes';
 import ServerConfig from './config/ServerConfig';
 import MongooseManager from './data/models/MongooseManager';
@@ -25,9 +24,6 @@ const redis = new RedisManager(app);
 
 // Redis cache middleware
 const redisCacheMiddleware = new RedisMiddleware(app, redis.client);
-
-// Security handler middleware
-//const securityHandler = new PassportAuthentication(app)
 
 // Routes
 const routes = new Routes(Express, app, commonMiddleware, redisCacheMiddleware, db.getMongoose());

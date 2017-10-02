@@ -1,27 +1,16 @@
 version: '3'
 services:
-  node:
-    build:
-      context: .
-      args:
-       - PLATFORM="development"
-       - HOST="0.0.0.0"
-       - PORT="3030"
-    ports:
-     - "3000:3030"
-    links:
-     - mongo
-     - redis
-    volumes:
-     - .:/opt/jodel/apps/jodel-backend-challange
-    container_name: jodel-backend
   mongo:
     image: "mongo"
     expose:
      - "27017"
+    ports:
+     - "27017:27017"
     container_name: mongo_db
   redis:
     image: "redis:alpine"
     expose:
      - "6379"
+    ports:
+     - "6379:6379"
     container_name: redis_db

@@ -34,16 +34,17 @@ export default class Routes {
       HomeController.getHome(req, res, next, this.db);
     });
 
-    // List users by /users?age=32&limit=3&page=0
-    this.app.get('/users', this.commonMiddleware.queryLimitPageCheck,
+    // List users by /users/list?age=32&limit=3&page=0
+    this.app.get('/users/list', this.commonMiddleware.queryLimitPageCheck,
       (req, res, next) => {
         this.redisCacheMiddleware.cacheCheck(req, res, next, this.redisCacheMiddleware);
       }, (req, res, next) => {
-        if (req.query.page) {
-          UserController.readUsersByPage(req, res, next, this.db, this.redisCacheMiddleware);
-        } else {
-          UserController.readUsers(req, res, next, this.db);
-        }
+        UserController.readUsersByPage(req, res, next, this.db, this.redisCacheMiddleware);
+    });
+
+    // List all users
+    this.app.get('/users', (req, res, next) => {
+        UserController.readUsers(req, res, next, this.db);
     });
 
     // Get single user by /user?email

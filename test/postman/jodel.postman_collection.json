@@ -48,7 +48,7 @@
 			"response": []
 		},
 		{
-			"name": "localhost:3030/users?age=32&limit=3&page=0",
+			"name": "localhost:3030/users/list?age=32&limit=3&page=0",
 			"request": {
 				"url": {
 					"raw": "localhost:3030/users?age=32&limit=3&page=-1",

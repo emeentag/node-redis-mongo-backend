@@ -100,7 +100,7 @@ describe('Jodel Backend Challange Testing', () => {
 
     it('should return limited list of users who are older than age 32.', (done) => {
       Chai.request(ServerConfig.SERVER_TEST)
-        .get('/users')
+        .get('/users/list')
         .query({ age: 32, limit: 3, page: 0 })
         .end((err, res) => {
           Expect(err).to.be.null;
@@ -108,6 +108,19 @@ describe('Jodel Backend Challange Testing', () => {
           Expect(res).to.be.json;
           Expect(res).not.to.be.empty;
           Expect(res.body).to.have.lengthOf.within(0, 4);
+          Expect(validator.isEmail(res.body[0].email)).to.be.true;
+          done();
+        });
+    });
+
+    it('should return limited list of users who are older than age 32.', (done) => {
+      Chai.request(ServerConfig.SERVER_TEST)
+        .get('/users')
+        .end((err, res) => {
+          Expect(err).to.be.null;
+          Expect(res).to.have.status(200);
+          Expect(res).to.be.json;
+          Expect(res).not.to.be.empty;
           Expect(validator.isEmail(res.body[0].email)).to.be.true;
           done();
         });

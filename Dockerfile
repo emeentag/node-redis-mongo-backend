@@ -1,3 +1,6 @@
+############# PLEASE IGNORE THE FILE #############
+# Coud be useful for deployment.
+
 # Create image from:
 FROM node:alpine
 
