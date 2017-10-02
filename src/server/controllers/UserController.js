@@ -104,7 +104,7 @@ export default class UserController {
     })
   }
 
-  // Delete users.
+  // Delete all users.
   static deleteUsers(req, res, next, db) {
     db.models.User.remove({}, (err) => {
       if (err) {

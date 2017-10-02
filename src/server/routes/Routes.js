@@ -27,8 +27,7 @@ export default class Routes {
   }
 
   createURLRoutes() {
-    // GETs
-
+    // ::::GETs::::
     // Home
     this.app.get('/', (req, res, next) => {
       HomeController.getHome(req, res, next, this.db);
@@ -48,8 +47,7 @@ export default class Routes {
       UserController.readUserByEmail(req, res, next, this.db);
     })
 
-    // POSTs
-
+    // ::::POSTs::::
     // Create single user with body.
     this.app.post('/user', this.middlewares.hasRequestBody, (req, res, next) => {
       UserController.createUser(req, res, next, this.db);
@@ -60,21 +58,19 @@ export default class Routes {
       UserController.createUsers(req, res, next, this.db);
     })
 
-    // PUTs
-
+    // ::::PUTs::::
     // Update single user by /user?email with body.
     this.app.put('/user', this.middlewares.queryContainsEmail, this.middlewares.hasRequestBody, (req, res, next) => {
       UserController.updateUserByEmail(req, res, next, this.db);
     })
 
-    // DELETEs
-
+    // ::::DELETEs::::
     // Delete single user by /user?email
     this.app.delete('/user', this.middlewares.queryContainsEmail, (req, res, next) => {
       UserController.deleteUserByEmail(req, res, next, this.db);
     })
     
-    // Delete all users
+    // Delete all users.
     this.app.delete('/users', (req, res, next) => {
       UserController.deleteUsers(req, res, next, this.db);
     })
