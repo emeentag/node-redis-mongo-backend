@@ -1,17 +1,22 @@
 # Create image from:
-FROM ubuntu:16.04
+FROM node:alpine
 
 # Define arguments with defaults:
+ARG PLATFORM="development"
 ARG HOST="0.0.0.0"
 ARG PORT="3030"
 
 # Set environment variables:
-ENV HOST=${HOST} \
+ENV PLATFORM=${PLATFORM} \
+    HOST=${HOST} \
     PORT=${PORT} \
     WORK_DIRECTORY=/opt/jodel/apps/jodel-backend-challange
 
 # Create project folder:
 RUN mkdir -p ${WORK_DIRECTORY}
+
+# Expose port
+EXPOSE 3030
 
 # Copy project resources to the image.
 # Source and test folders are needed to be mounted.

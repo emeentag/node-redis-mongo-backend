@@ -1,0 +1,19 @@
+version: '3'
+services:
+  web:
+    build: .
+    ports:
+     - "3030:3030"
+    volumes:
+     - .:/opt/jodel/apps/jodel-backend-challange
+    container_name: jodel-web
+  mongo:
+    image: "mongo"
+    ports:
+     - "27017:27017"
+    container_name: mongo_db
+  redis:
+    image: "redis:alpine"
+    ports:
+     - "6379:6379"
+    container_name: redis_db
