@@ -1,4 +1,6 @@
 import Mongoose from 'mongoose';
+import Bluebird from 'bluebird';
+
 import User from './User';
 import Post from './Post';
 import ServerConfig from '../config/ServerConfig';
@@ -11,9 +13,9 @@ export default class MongooseDB {
   }
 
   connectMongo() {
+    Mongoose.Promise = Bluebird;
     Mongoose.connect(ServerConfig.MONGO_DB_URL + ServerConfig.MONGO_DB, {
-      useMongoClient: true, 
-      promiseLibrary: global.Promise
+      useMongoClient: true
     });
 
     Mongoose.connection.on('error', console.error.bind(console, "Connection error occured!"));

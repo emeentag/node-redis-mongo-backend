@@ -5,10 +5,11 @@ import UserController from '../controllers/UserController';
 
 export default class Routes {
 
-  constructor(express, app, db) {
+  constructor(express, app, db, middlewares) {
     this.express = express;
     this.app = app;
     this.db = db;
+    this.middlewares = middlewares;
     this.loadTemplateResources()
     this.loadStaticResources()
     this.createURLRoutes();
@@ -27,25 +28,50 @@ export default class Routes {
 
   createURLRoutes() {
     // GETs
+
+    // Home
     this.app.get('/', (req, res, next) => {
       HomeController.getHome(req, res, next, this.db);
     });
 
+    // List users by /users?age=32&limit=3&page=0
     this.app.get('/users', (req, res, next) => {
-      UserController.readUsers(req, res, next, this.db);
+      if(req.query.page) {
+        UserController.readUsersByPage(req, res, next, this.db);
+      } else {
+        UserController.readUsers(req, res, next, this.db);
+      }
     })
 
-    this.app.get('/user', (req, res, next) => {
-      UserController.readUser(req, res, next, this.db);
+    // Get single user by /user?email
+    this.app.get('/user', this.middlewares.queryContainsEmail, (req, res, next) => {
+      UserController.readUserByEmail(req, res, next, this.db);
     })
 
     // POSTs
-    this.app.post('/user', (req, res, next) => {
+
+    // Create single user with body.
+    this.app.post('/user', this.middlewares.hasRequestBody, (req, res, next) => {
       UserController.createUser(req, res, next, this.db);
     })
 
-    this.app.post('/users', (req, res, next) => {
+    // Create many user with body.
+    this.app.post('/users', this.middlewares.hasRequestBody, (req, res, next) => {
       UserController.createUsers(req, res, next, this.db);
+    })
+
+    // PUTs
+
+    // Update single user by /user?email with body.
+    this.app.put('/user', this.middlewares.queryContainsEmail, this.middlewares.hasRequestBody, (req, res, next) => {
+      UserController.updateUserByEmail(req, res, next, this.db);
+    })
+
+    // DELETEs
+
+    // Delete single user by /user?email
+    this.app.delete('/user', (req, res, next) => {
+      UserController.deleteUserByEmail(req, res, next, this.db);
     })
   }
 }

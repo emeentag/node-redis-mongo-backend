@@ -21,7 +21,7 @@ const db = new MongooseDB(app);
 //const securityHandler = new PassportAuthentication(app)
 
 // Routes
-const routes = new Routes(Express, app, db.getMongoose());
+const routes = new Routes(Express, app, db.getMongoose(), middlewares);
 
 var server = app.listen(ServerConfig.SERVER_PORT, ServerConfig.SERVER_HOST, () => {
   var host = server.address().address;
