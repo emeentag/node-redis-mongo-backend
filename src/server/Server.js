@@ -32,6 +32,6 @@ var server = app.listen(ServerConfig.SERVER_PORT, ServerConfig.SERVER_HOST, () =
   var host = server.address().address;
   var port = server.address().port;
   
-  console.log("Server ENV is " + process.env.NODE_ENV);
-  console.log("Server is listening at http://" + host + ":" + port);
+  console.log(`Server ENV is ${process.env.NODE_ENV}`);
+  console.log(`Server is listening at http://${host}:${port}`);
 });

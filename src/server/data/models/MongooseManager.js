@@ -18,10 +18,10 @@ export default class MongooseManager {
       useMongoClient: true
     });
 
-    Mongoose.connection.on('error', console.error.bind(console, "Connection error occured!"));
+    Mongoose.connection.on('error', console.error.bind(console, 'Connection error occured!'));
 
     Mongoose.connection.once('open', () => {
-      console.log("Mongo connection is successfull.");
+      console.log('Mongo connection is successfull.');
       this.loadModels();
     })
   }
@@ -32,7 +32,7 @@ export default class MongooseManager {
   loadModels() {
     var user = new User(Mongoose);
     //var post = new Post(Mongoose);
-    console.log("Mongo models are loaded.");
+    console.log('Mongo models are loaded.');
   }
 
   getMongoose() {
