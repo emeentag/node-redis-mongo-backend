@@ -113,7 +113,7 @@ describe('Jodel Backend Challange Testing', () => {
         });
     });
 
-    it('should return limited list of users who are older than age 32.', (done) => {
+    it('should return all users.', (done) => {
       Chai.request(ServerConfig.SERVER_TEST)
         .get('/users')
         .end((err, res) => {
