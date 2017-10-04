@@ -17,6 +17,7 @@ This is an API server for users. I did not use suggested starter kits. Because i
 First of all clone or fork this repository. After you successfully clone it then you are ready to setup your environment.
 
 ### Setup your environment with using docker:
+* Run `npm install` to install all node dependencies.
 * Run `docker-compose up` in a terminal. With this command you will have both mongo and redis server in your environment.
 * Run `npm run server:development` in another terminal session.
 * **You are done.** You can go `http://localhost:3030` and check if everything is up and running.
