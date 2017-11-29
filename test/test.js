@@ -7,7 +7,7 @@ import users from '../src/server/data/seeds/users.json';
 var Expect = Chai.expect;
 Chai.use(ChaiClient);
 
-describe('Jodel Backend Challange Testing', () => {
+describe('Backend Testing', () => {
   describe('Clear test DB before testing.', () => {
     it('should delete all records on DB.', (done) => {
       Chai.request(ServerConfig.SERVER_TEST)
