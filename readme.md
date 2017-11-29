@@ -1,4 +1,4 @@
-# Backend Code Challenge
+# Backend with Redis and Mongo
 
 This is an API server for users. I did not use suggested starter kits. Because i feel more comfortable with my own code and it has to be shown you how can i design. Anyway, in this project you are able to do all type of CRUD actions on users. I am using mongo nosql database for storing the data. Also I am using redis for caching some endpoints. You can run BDD tests or postman tests.
 
@@ -28,7 +28,7 @@ First of all clone or fork this repository. After you successfully clone it then
 * You will seee the results in that terminal session. Don't bother to run your test script again and again. Sample test result is can be seen below:
 
 ```
-  Jodel Backend Challange Testing
+  Backend Testing
     Clear test DB before testing.
       ✓ should delete all records on DB. (50ms)
     Test results for POST requests.
