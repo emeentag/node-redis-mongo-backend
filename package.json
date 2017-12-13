@@ -1,5 +1,5 @@
 {
-  "name": "jodel-beackend-challange",
+  "name": "backend-redis-mongo",
   "version": "1.0.0",
   "description": "This is the backend challange reasources.",
   "main": "index.js",
@@ -10,11 +10,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://ssimsek@bitbucket.org/ssimsek/jodel-beackend-challange.git"
+    "url": ""
   },
   "author": "Serdar Simsek - ssimsek@outlook.com",
   "license": "ISC",
-  "homepage": "https://bitbucket.org/ssimsek/jodel-beackend-challange#readme",
+  "homepage": "",
   "devDependencies": {
     "async": "^2.5.0",
     "axios": "^0.16.2",

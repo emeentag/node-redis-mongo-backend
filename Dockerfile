@@ -13,7 +13,7 @@ ARG PORT="3030"
 ENV PLATFORM=${PLATFORM} \
     HOST=${HOST} \
     PORT=${PORT} \
-    WORK_DIRECTORY=/opt/jodel/apps/jodel-backend-challange
+    WORK_DIRECTORY=/opt/my_app/apps
 
 # Create project folder:
 RUN mkdir -p ${WORK_DIRECTORY}
