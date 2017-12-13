@@ -1,6 +1,6 @@
 # Backend with Redis and Mongo
 
-This is an API server for users. I did not use suggested starter kits. Because i feel more comfortable with my own code and it has to be shown you how can i design. Anyway, in this project you are able to do all type of CRUD actions on users. I am using mongo nosql database for storing the data. Also I am using redis for caching some endpoints. You can run BDD tests or postman tests.
+This is an API server for users. Because i feel more comfortable with my own code and it has to be shown you how can i design. Anyway, in this project you are able to do all type of CRUD actions on users. I am using mongo nosql database for storing the data. Also I am using redis for caching some endpoints. You can run BDD tests or postman tests.
 
 ## Technology used:
 * Node.js
