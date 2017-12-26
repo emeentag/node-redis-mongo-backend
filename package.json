@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/hopbalabi/node-redis-mongo-backend.git"
   },
   "author": "Serdar Simsek - ssimsek@outlook.com",
   "license": "ISC",
